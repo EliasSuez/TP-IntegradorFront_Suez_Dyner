@@ -1,42 +1,121 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Reset básico y tipografía */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background-color: #f6f8fb;
+  color: #222;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Navbar */
+nav {
+  background: #1565c0;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+nav a:hover {
+  background: #0d47a1;
+}
+
+/* Page container */
+section {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(30, 80, 170, 0.06);
+}
+
+/* Headings */
+h1, h2 {
+  color: #1565c0;
+  margin-top: 0;
+}
+
+/* Buttons */
+button,
+input[type="submit"] {
+  background: #1565c0;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.7em 1.4em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+  margin-top: 0.5em;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #0d47a1;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-top: 1em;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+input, select, textarea {
+  padding: 0.6em;
+  border-radius: 4px;
+  border: 1px solid #bfc9db;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #1565c0;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  section {
+    padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  nav {
+    padding: 1rem;
+    gap: 0.7rem;
+    font-size: 1rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.card-list {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr 1fr;
 }
 
 .card {
-  padding: 2em;
+  background: #f0f4fa;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 12px rgba(30,80,170,0.04);
 }
-
-.read-the-docs {
-  color: #888;
+@media (max-width: 700px) {
+  .card-list {
+    grid-template-columns: 1fr;
+  }
 }
