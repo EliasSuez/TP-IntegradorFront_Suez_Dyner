@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config";
+import { Link } from "react-router-dom";
 
 export default function Eventos() {
   const [eventos, setEventos] = useState([]);
@@ -10,8 +11,7 @@ export default function Eventos() {
     fetch(`${API_BASE_URL}/api/event`)
       .then(res => res.json())
       .then(data => {
-        console.log("Respuesta de la API:", data); 
-        setEventos(data.events); 
+        setEventos(data.events);
         setLoading(false);
       })
       .catch(err => {
@@ -28,17 +28,23 @@ export default function Eventos() {
       {eventos.length === 0 && !loading && <p>No hay eventos disponibles.</p>}
       <ul className="card-list">
         {eventos.map(evento => (
-          <li key={evento.id || evento._id} className="card">
-            <h3>{evento.nombre}</h3>
-            <p>
-              Fecha: <strong>{evento.fecha}</strong>
-              <br />
-              Ubicación: {evento.ubicacion}
-            </p>
+          <li key={evento.id} className="card">
+            <Link to={`/eventos/${evento.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <h3>{evento.name}</h3>
+              <p>
+                Descripción: {evento.description}
+                <br />
+                Fecha: <strong>{evento.start_date}</strong>
+                <br />
+                Ubicación ID: {evento.id_event_location ?? "Sin ubicación"}
+              </p>
+            </Link>
           </li>
         ))}
       </ul>
-      <button>Crear evento</button>
+      <Link to="/eventos/nuevo">
+        <button>Crear evento</button>
+      </Link>
     </section>
   );
 }

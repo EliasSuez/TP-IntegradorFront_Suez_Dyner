@@ -6,7 +6,9 @@ body {
   background-color: #f6f8fb;
   color: #222;
 }
-
+li{
+  list-style-type: none;
+}
 /* Navbar */
 nav {
   background: #1565c0;
@@ -32,12 +34,14 @@ nav a:hover {
 
 /* Page container */
 section {
-  max-width: 700px;
-  margin: 2rem auto;
+  width: 100vw;           /* Ocupar todo el ancho de la ventana */
+  max-width: none;        /* Elimina el límite de ancho */
+  margin: 0;              /* Elimina el centrado automático */
   background: #fff;
   padding: 2rem 2.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 32px rgba(30, 80, 170, 0.06);
+  box-sizing: border-box; /* Para que el padding no sobresalga */
 }
 
 /* Headings */
@@ -94,6 +98,9 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 700px) {
   section {
     padding: 1rem;
+    width: 100vw;
+    max-width: none;
+    margin: 0;
   }
   nav {
     padding: 1rem;
@@ -103,9 +110,10 @@ input:focus, select:focus, textarea:focus {
 }
 
 .card-list {
+  width: 99%;          
   display: grid;
-  gap: 1.2rem;
-  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  grid-template-columns: 0.4fr 0.4fr 0.4fr 0.4fr;
 }
 
 .card {
@@ -113,9 +121,6 @@ input:focus, select:focus, textarea:focus {
   border-radius: 8px;
   padding: 1.2rem;
   box-shadow: 0 2px 12px rgba(30,80,170,0.04);
-}
-@media (max-width: 700px) {
-  .card-list {
-    grid-template-columns: 1fr;
-  }
+  width: 100%;               /* Ocupar todo el ancho de la celda */
+  box-sizing: border-box;
 }
