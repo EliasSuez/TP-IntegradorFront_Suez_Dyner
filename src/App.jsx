@@ -5,6 +5,8 @@ import Eventos from "./pages/Eventos";
 import EventoDetalle from "./pages/EventoDetalle";
 import EventoForm from "./pages/EventoForm";
 import Ubicaciones from "./pages/Ubicaciones";
+import UbicacionesDetalle from "./pages/UbicacionDetalle";
+import UbicacionesForm from "./pages/UbicacionForm";
 import Login from "./pages/Login";
 import "./App.css";
 
@@ -19,6 +21,9 @@ export default function App() {
         <Route path="/eventos/nuevo" element={<EventoForm />} />
         <Route path="/ubicaciones" element={<Ubicaciones />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/ubicaciones/:id" element={<UbicacionesDetalle />} />
+        <Route path="/ubicaciones/nueva" element={<UbicacionesForm />} />
+        <Route path="/ubicaciones/:id/editar" element={<UbicacionesForm />} />
       </Routes>
     </BrowserRouter>
   );

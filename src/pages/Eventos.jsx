@@ -8,10 +8,13 @@ export default function Eventos() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/event`)
-      .then(res => res.json())
+    fetch(`${API_BASE_URL}/api/event?limit=1000`)
+      .then(res => {
+        if (!res.ok) throw new Error("Error al obtener eventos");
+        return res.json();
+      })
       .then(data => {
-        setEventos(data.events);
+        setEventos(Array.isArray(data.events) ? data.events : []);
         setLoading(false);
       })
       .catch(err => {
@@ -32,12 +35,23 @@ export default function Eventos() {
             <Link to={`/eventos/${evento.id}`} style={{ textDecoration: "none", color: "inherit" }}>
               <h3>{evento.name}</h3>
               <p>
-                Descripción: {evento.description}
+                <strong>Descripción:</strong> {evento.description}<br />
+                <strong>Fecha:</strong> {new Date(evento.start_date).toLocaleString()}<br />
+                <strong>Duración:</strong> {evento.duration_in_minutes} minutos<br />
+                <strong>Precio:</strong> ${evento.price}<br />
+                <strong>Ubicación:</strong>{" "}
+                  {evento.event_location && evento.event_location.name
+                    ? evento.event_location.name + " (" + evento.event_location.full_address + ")"
+                    : "Sin ubicación"}
                 <br />
-                Fecha: <strong>{evento.start_date}</strong>
-                <br />
-                Ubicación ID: {evento.id_event_location ?? "Sin ubicación"}
+                <strong>Máx. asistencia:</strong> {evento.max_assistance}
               </p>
+              {/* Opcional: muestra nombre del creador si existe */}
+              {evento.creator_user && evento.creator_user.first_name && (
+                <small>
+                  <strong>Creador:</strong> {evento.creator_user.first_name} {evento.creator_user.last_name}
+                </small>
+              )}
             </Link>
           </li>
         ))}
