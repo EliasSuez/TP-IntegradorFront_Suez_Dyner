@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../config";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  CircularProgress,
+  Alert,
+  Stack,
+  Paper
+} from "@mui/material";
 
 export default function UbicacionesForm() {
   const { id } = useParams();
@@ -75,43 +85,114 @@ export default function UbicacionesForm() {
   };
 
   return (
-    <section>
-      <h2>{id ? "Editar ubicación" : "Crear ubicación"}</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nombre:
-          <input name="name" value={form.name} onChange={handleChange} required />
-        </label>
-        <br />
-        <label>
-          Dirección completa:
-          <input name="full_address" value={form.full_address} onChange={handleChange} required />
-        </label>
-        <br />
-        <label>
-          Capacidad máxima:
-          <input name="max_capacity" value={form.max_capacity} onChange={handleChange} type="number" required />
-        </label>
-        <br />
-        <label>
-          Latitud:
-          <input name="latitude" value={form.latitude} onChange={handleChange} type="number" />
-        </label>
-        <br />
-        <label>
-          Longitud:
-          <input name="longitude" value={form.longitude} onChange={handleChange} type="number" />
-        </label>
-        <br />
-        <label>
-          ID Location (opcional):
-          <input name="id_location" value={form.id_location} onChange={handleChange} />
-        </label>
-        <br />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" disabled={loading}>{id ? "Guardar cambios" : "Crear ubicación"}</button>
-      </form>
-      <button onClick={() => navigate("/ubicaciones")}>Volver</button>
-    </section>
+    <Box sx={{
+      p: 3,
+      minHeight: "80vh",
+      bgcolor: "background.default",
+      background: "linear-gradient(135deg, #e3f2fd 0%, #fffde7 100%)"
+    }}>
+      <Paper
+        elevation={6}
+        sx={{
+          borderRadius: 3,
+          p: 4,
+          maxWidth: 500,
+          mx: "auto",
+          boxShadow: "0 4px 24px #1976d233",
+          bgcolor: "#fff"
+        }}
+      >
+        <Typography variant="h5" sx={{ fontWeight: 700, color: "#1976d2", mb: 2 }}>
+          {id ? "Editar ubicación" : "Crear ubicación"}
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={2}>
+            <TextField
+              label="Nombre"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+              fullWidth
+            />
+            <TextField
+              label="Dirección completa"
+              name="full_address"
+              value={form.full_address}
+              onChange={handleChange}
+              required
+              fullWidth
+            />
+            <TextField
+              label="Capacidad máxima"
+              name="max_capacity"
+              value={form.max_capacity}
+              onChange={handleChange}
+              type="number"
+              required
+              fullWidth
+            />
+            <TextField
+              label="Latitud"
+              name="latitude"
+              value={form.latitude}
+              onChange={handleChange}
+              type="number"
+              fullWidth
+            />
+            <TextField
+              label="Longitud"
+              name="longitude"
+              value={form.longitude}
+              onChange={handleChange}
+              type="number"
+              fullWidth
+            />
+            <TextField
+              label="ID Location (opcional)"
+              name="id_location"
+              value={form.id_location}
+              onChange={handleChange}
+              fullWidth
+            />
+            {error && <Alert severity="error">{error}</Alert>}
+            <Stack direction="row" spacing={2}>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={loading}
+                sx={{
+                  bgcolor: "#1976d2",
+                  fontWeight: 600,
+                  ":hover": { bgcolor: "#1565c0", transform: "scale(1.07)" },
+                  transition: "all 0.2s"
+                }}
+              >
+                {id ? "Guardar cambios" : "Crear ubicación"}
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => navigate("/ubicaciones")}
+                sx={{
+                  borderRadius: 2,
+                  fontWeight: 600,
+                  borderColor: "#1976d2",
+                  color: "#1976d2",
+                  ":hover": { bgcolor: "#e3f2fd", borderColor: "#1565c0", color: "#1565c0" },
+                  transition: "all 0.2s"
+                }}
+              >
+                Volver
+              </Button>
+            </Stack>
+          </Stack>
+        </form>
+        {loading && (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+            <CircularProgress color="primary" />
+          </Box>
+        )}
+      </Paper>
+    </Box>
   );
 }
