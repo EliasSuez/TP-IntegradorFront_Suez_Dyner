@@ -26,7 +26,7 @@ export default function Ubicaciones() {
       },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Error al obtener ubicaciones");
+        if (!res.ok) throw new Error("Error al obtener ubicaciones, asegurate estar logeado");
         return res.json();
       })
       .then((data) => {
